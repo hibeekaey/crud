@@ -6,7 +6,7 @@ import {
   DELETE_CATEGORY
 } from "../constants";
 
-export default function category(state = {}, action) {
+export default function category(state = { data: ["Software"] }, action) {
   switch (action.type) {
     case GET_CATEGORIES:
       return {
