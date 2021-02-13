@@ -1,3 +1,4 @@
 import BusinessList from "./BusinessList";
+import BusinessForm from "./BusinessForm";
 
-export { BusinessList };
+export { BusinessList, BusinessForm };

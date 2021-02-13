@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { Container, Segment, Input, Tab } from "semantic-ui-react";
-import { BusinessList } from "../components/Business";
-import { CategoryList } from "../components/Category";
+import { BusinessForm, BusinessList } from "../components/Business";
+import { CategoryForm, CategoryList } from "../components/Category";
 
 function Dashboard({ loggedIn, businesses, categories }) {
   const history = useHistory();
@@ -18,11 +18,21 @@ function Dashboard({ loggedIn, businesses, categories }) {
   const panes = [
     {
       menuItem: "Business",
-      render: () => <BusinessList businesses={businesses} />
+      render: () => (
+        <>
+          <BusinessForm />
+          <BusinessList businesses={businesses} />
+        </>
+      )
     },
     {
       menuItem: "Category",
-      render: () => <CategoryList categories={categories} />
+      render: () => (
+        <>
+          <CategoryForm />
+          <CategoryList categories={categories} />
+        </>
+      )
     }
   ];
 

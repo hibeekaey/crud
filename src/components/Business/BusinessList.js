@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Accordion } from "semantic-ui-react";
+import { Accordion, List } from "semantic-ui-react";
 
 function BusinessList({ businesses }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -24,7 +24,21 @@ function BusinessList({ businesses }) {
           {business.name}
         </Accordion.Title>
         <Accordion.Content active={activeIndex === i}>
-          {business.url}
+          <List>
+            <List.Item icon="tint" content={business.description} />
+            <List.Item
+              icon="phone"
+              content={<a href={`tel:${business.phone}`}>{business.phone}</a>}
+            />
+            <List.Item
+              icon="linkify"
+              content={
+                <a href={`https://${business.url}`} target="blank">
+                  {business.url}
+                </a>
+              }
+            />
+          </List>
         </Accordion.Content>
       </Accordion>
     ))

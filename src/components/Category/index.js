@@ -1,3 +1,4 @@
 import CategoryList from "./CategoryList";
+import CategoryForm from "./CategoryForm";
 
-export { CategoryList };
+export { CategoryList, CategoryForm };
