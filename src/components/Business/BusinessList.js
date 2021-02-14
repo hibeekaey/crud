@@ -40,7 +40,7 @@ function BusinessList({ activeBusiness, businesses, setActiveBusiness }) {
             <List.Item
               icon="linkify"
               content={
-                <a href={`https://${business.url}`} target="blank">
+                <a href={business.url} target="blank">
                   {business.url}
                 </a>
               }
