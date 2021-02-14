@@ -28,6 +28,12 @@ function Home({ businesses }) {
                 <label>Search Business</label>
                 <Input
                   fluid
+                  icon={{
+                    name: "close",
+                    circular: true,
+                    link: true,
+                    onClick: () => setSearch("")
+                  }}
                   value={search}
                   onInput={(e) => setSearch(e.target.value)}
                   placeholder="Search Business"

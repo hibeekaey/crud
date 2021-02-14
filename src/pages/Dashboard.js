@@ -81,6 +81,12 @@ function Dashboard({
                 <label>Search Business</label>
                 <Input
                   fluid
+                  icon={{
+                    name: "close",
+                    circular: true,
+                    link: true,
+                    onClick: () => setBusinessSearch("")
+                  }}
                   value={businessSearch}
                   onInput={(e) => setBusinessSearch(e.target.value)}
                   placeholder="Search Business"
@@ -118,6 +124,12 @@ function Dashboard({
                 <label>Search Category</label>
                 <Input
                   fluid
+                  icon={{
+                    name: "close",
+                    circular: true,
+                    link: true,
+                    onClick: () => setCategorySearch("")
+                  }}
                   value={categorySearch}
                   onInput={(e) => setCategorySearch(e.target.value)}
                   placeholder="Search Category"

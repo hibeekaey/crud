@@ -13,7 +13,7 @@ function CustomHeader({ loggedIn, logout }) {
               to="/"
               style={{ fontSize: 32, fontWeight: 600, color: "green" }}
             >
-              CRUD
+              CRUD.io
             </Link>
           </Menu.Item>
 
