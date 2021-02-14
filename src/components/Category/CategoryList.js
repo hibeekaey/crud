@@ -32,37 +32,44 @@ function CategoryList({
   };
 
   return (
-    categories &&
-    categories.map((category, i) => (
-      <Accordion key={i} fluid styled>
-        <Accordion.Title
-          active={activeIndex === i}
-          index={i}
-          onClick={handleClick}
-        >
-          <Icon name="dropdown" />
-          {category.name}
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === i}>
-          <List>
-            {deleteCategory && (
-              <List.Item>
-                <Button color="red" fluid size="small" onClick={openConfirm}>
-                  Delete
-                </Button>
-                <Confirm
-                  open={confirmOpen}
-                  content="Are you sure you want to delete this Category?"
-                  confirmButton="Delete"
-                  onCancel={closeConfirm}
-                  onConfirm={() => removeCategory(category.id)}
-                />
-              </List.Item>
-            )}
-          </List>
-        </Accordion.Content>
-      </Accordion>
-    ))
+    <Accordion fluid styled>
+      {categories &&
+        categories.map((category, i) => (
+          <React.Fragment key={i}>
+            <Accordion.Title
+              active={activeIndex === i}
+              index={i}
+              onClick={handleClick}
+            >
+              <Icon name="dropdown" />
+              {category.name}
+            </Accordion.Title>
+            <Accordion.Content active={activeIndex === i}>
+              <List>
+                {deleteCategory && (
+                  <List.Item>
+                    <Button
+                      color="red"
+                      fluid
+                      size="small"
+                      onClick={openConfirm}
+                    >
+                      Delete
+                    </Button>
+                    <Confirm
+                      open={confirmOpen}
+                      content="Are you sure you want to delete this Category?"
+                      confirmButton="Delete"
+                      onCancel={closeConfirm}
+                      onConfirm={() => removeCategory(category.id)}
+                    />
+                  </List.Item>
+                )}
+              </List>
+            </Accordion.Content>
+          </React.Fragment>
+        ))}
+    </Accordion>
   );
 }
 

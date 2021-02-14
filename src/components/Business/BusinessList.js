@@ -28,7 +28,7 @@ function BusinessList({
     <Card.Group centered>
       {businesses &&
         businesses.map((business, i) => (
-          <Card fluid={deleteBusiness} key={i}>
+          <Card fluid={!!deleteBusiness} key={i}>
             <Image
               src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
               wrapped

@@ -72,9 +72,9 @@ function Dashboard({
 
   const panes = [
     {
-      menuItem: "Business",
+      menuItem: "Businesses",
       render: () => (
-        <Grid reversed="mobile vertically" columns={2}>
+        <Grid reversed="tablet vertically" columns={2}>
           <Grid.Column mobile={16} computer={8}>
             <Form>
               <Form.Field>
@@ -109,9 +109,9 @@ function Dashboard({
       )
     },
     {
-      menuItem: "Category",
+      menuItem: "Categories",
       render: () => (
-        <Grid reversed="mobile vertically" columns={2}>
+        <Grid reversed="tablet vertically" columns={2}>
           <Grid.Column mobile={16} computer={8}>
             <Form>
               <Form.Field>
@@ -150,7 +150,12 @@ function Dashboard({
       <Container>
         <Segment as="section" basic vertical>
           <Tab
-            menu={{ fluid: true, vertical: true, tabular: true }}
+            menu={{
+              fluid: true,
+              pointing: true,
+              secondary: true,
+              vertical: true
+            }}
             panes={panes}
           />
         </Segment>
