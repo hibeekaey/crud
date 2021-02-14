@@ -22,7 +22,7 @@ function Login({ loggedIn, login }) {
           <br />
           <Form
             onSubmit={() => login(email, password)}
-            style={{ margin: "0 auto", maxWidth: 600 }}
+            style={{ margin: "0 auto", maxWidth: 400 }}
           >
             <Form.Field>
               <label>Email</label>
@@ -43,7 +43,7 @@ function Login({ loggedIn, login }) {
               />
             </Form.Field>
             <br />
-            <Button fluid color="blue" type="submit">
+            <Button fluid color="green" type="submit">
               Login
             </Button>
           </Form>
