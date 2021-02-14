@@ -5,13 +5,11 @@ export default function user(state = { loggedIn: false }, action) {
     case LOGIN_USER:
       return {
         ...state,
-
         loggedIn: true
       };
     case LOGOUT_USER:
       return {
         ...state,
-
         loggedIn: false
       };
     default:
