@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Accordion, List } from "semantic-ui-react";
+import { Accordion, List, Button } from "semantic-ui-react";
 
-function BusinessList({ activeBusiness, businesses, setActiveBusiness }) {
+function BusinessList({ activeBusiness, businesses, setActiveBusiness, deleteBusiness }) {
   const [activeIndex, setActiveIndex] = useState(null);
 
   useEffect(() => {
@@ -45,6 +45,11 @@ function BusinessList({ activeBusiness, businesses, setActiveBusiness }) {
                 </a>
               }
             />
+            <List.Item>
+              <Button color="red" size=tiny" onClick={() => deleteBusiness()}>
+                Delete
+              </Button>
+            </List.Item>
           </List>
         </Accordion.Content>
       </Accordion>
@@ -55,7 +60,8 @@ function BusinessList({ activeBusiness, businesses, setActiveBusiness }) {
 BusinessList.propType = {
   businesses: PropTypes.array.isRequired,
   activeBusiness: PropTypes.object,
-  setActiveBusiness: PropTypes.func
+  setActiveBusiness: PropTypes.func,
+  deleteBusiness: PropTypes.func
 };
 
 export default BusinessList;
