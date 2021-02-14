@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createRef } from "react";
 import PropTypes from "prop-types";
 import { Form, Message, Button, Dropdown } from "semantic-ui-react";
 
@@ -16,6 +16,9 @@ function BusinessForm({
   const [categories, setCategories] = useState([]);
   const [images, setImages] = useState([]);
   const [formError, setFormError] = useState(false);
+  const [imageSelected, setImageSelected] = useState(false);
+
+  const fileInputRef = createRef();
 
   useEffect(() => {
     if (activeBusiness) {
@@ -71,6 +74,7 @@ function BusinessForm({
     setUrl("");
     setCategories([]);
     setImages([]);
+    setImageSelected(false);
   };
 
   const getImage = (e) => {
@@ -82,12 +86,13 @@ function BusinessForm({
     reader.onloadend = () => {
       const image = reader.result;
       setImages([...images, image]);
+      setImageSelected(true);
     };
 
     try {
       reader.readAsDataURL(file);
     } catch (e) {
-      console.log(e);
+      setImageSelected(false);
     }
   };
 
@@ -178,7 +183,16 @@ function BusinessForm({
           </Form.Field>
           <Form.Field>
             <label>Image</label>
-            <input type="file" onChange={getImage} placeholder="File" />
+            <Button
+              content={imageSelected ? "Image Selected" : "Select Image"}
+              labelPosition="left"
+              icon="file"
+              fluid
+              color="blue"
+              type="button"
+              onClick={() => fileInputRef.current.click()}
+            />
+            <input ref={fileInputRef} type="file" hidden onChange={getImage} />
           </Form.Field>
         </Form.Group>
         <div className="ui two buttons">
