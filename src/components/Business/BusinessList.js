@@ -54,8 +54,8 @@ function BusinessList({ activeBusiness, businesses, setActiveBusiness }) {
 
 BusinessList.propType = {
   businesses: PropTypes.array.isRequired,
-  activeBusiness: PropTypes.object.isRequired,
-  setActiveBusiness: PropTypes.func.isRequired
+  activeBusiness: PropTypes.object,
+  setActiveBusiness: PropTypes.func
 };
 
 export default BusinessList;
