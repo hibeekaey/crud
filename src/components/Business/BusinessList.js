@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Accordion, List } from "semantic-ui-react";
 
-function BusinessList({ businesses }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+function BusinessList({ activeBusiness, businesses, setActiveBusiness }) {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  useEffect(() => {
+    if (!activeBusiness) setActiveIndex(null);
+  }, [activeBusiness, setActiveIndex]);
 
   const handleClick = (e, titleProps) => {
     const { index } = titleProps;
     const newIndex = activeIndex === index ? -1 : index;
 
     setActiveIndex(newIndex);
+    if (setActiveBusiness) {
+      setActiveBusiness(businesses[newIndex]);
+    }
   };
 
   return (
@@ -46,7 +53,9 @@ function BusinessList({ businesses }) {
 }
 
 BusinessList.propType = {
-  businesses: PropTypes.array.isRequired
+  businesses: PropTypes.array.isRequired,
+  activeBusiness: PropTypes.object.isRequired,
+  setActiveBusiness: PropTypes.func.isRequired
 };
 
 export default BusinessList;

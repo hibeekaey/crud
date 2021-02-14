@@ -1,20 +1,22 @@
 import {
-  GET_CATEGORIES,
+  SET_ACTIVE_CATEGORY,
   CREATE_CATEGORY,
   GET_CATEGORY,
   UPDATE_CATEGORY,
   DELETE_CATEGORY
 } from "../constants";
 
-export const getCategories = () => {
+export const setActiveCategory = (category) => {
   return {
-    type: GET_CATEGORIES
+    type: SET_ACTIVE_CATEGORY,
+    payload: category
   };
 };
 
-export const createCategory = () => {
+export const createCategory = (category) => {
   return {
-    type: CREATE_CATEGORY
+    type: CREATE_CATEGORY,
+    payload: category
   };
 };
 
@@ -24,9 +26,10 @@ export const getCategory = () => {
   };
 };
 
-export const updateCategory = () => {
+export const updateCategory = (category) => {
   return {
-    type: UPDATE_CATEGORY
+    type: UPDATE_CATEGORY,
+    payload: category
   };
 };
 

@@ -11,9 +11,7 @@ function Login({ loggedIn, login }) {
   const history = useHistory();
 
   useEffect(() => {
-    if (loggedIn) {
-      history.push("/dashboard");
-    }
+    if (loggedIn) history.push("/dashboard");
   }, [loggedIn, history]);
 
   return (

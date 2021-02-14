@@ -1,54 +1,64 @@
 import {
-  GET_BUSINESSES,
+  SET_ACTIVE_BUSINESS,
   CREATE_BUSINESS,
-  GET_BUSINESS,
   UPDATE_BUSINESS,
   DELETE_BUSINESS
 } from "../constants";
+import { v4 } from "uuid";
 
 export default function business(
-  state = {
-    data: [
-      {
-        name: "Ibukun Dairo",
-        description: "Senior Software Engineer",
-        phone: "08158486068",
-        url: "hibeekaey.me",
-        categories: ["Software"],
-        images: ["https://placeimg.com/160/160/any"]
-      },
-      {
-        name: "Cuesoft",
-        description: "CEO",
-        phone: "09026509478",
-        url: "cuesoft.io",
-        categories: ["Software"],
-        images: ["https://placeimg.com/160/160/any"]
-      }
-    ]
-  },
+  state = { data: [], activeBusiness: null },
   action
 ) {
+  let data;
   switch (action.type) {
-    case GET_BUSINESSES:
+    case SET_ACTIVE_BUSINESS:
       return {
-        ...state
+        ...state,
+        activeBusiness: action.payload
       };
     case CREATE_BUSINESS:
+      data = [...state.data];
+      const filteredData = data.filter(
+        (business) => business.name === action.payload.name
+      );
+      if (
+        !filteredData.length &&
+        action.payload.name !== null &&
+        action.payload.name !== "" &&
+        action.payload.description !== null &&
+        action.payload.description !== "" &&
+        action.payload.phone !== null &&
+        action.payload.phone !== "" &&
+        action.payload.url !== null &&
+        action.payload.url !== ""
+      ) {
+        data.push({ id: v4(), ...action.payload });
+      }
       return {
-        ...state
-      };
-    case GET_BUSINESS:
-      return {
-        ...state
+        ...state,
+        data
       };
     case UPDATE_BUSINESS:
+      data = [...state.data];
+      const updatedData = data.map((business) => {
+        if (business.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return business;
+        }
+      });
       return {
-        ...state
+        ...state,
+        data: updatedData,
+        activeBusiness: null
       };
     case DELETE_BUSINESS:
+      data = [...state.data];
       return {
-        ...state
+        ...state,
+        data,
+        activeBusiness: null
       };
     default:
       return state;

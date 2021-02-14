@@ -1,20 +1,22 @@
 import {
-  GET_BUSINESSES,
+  SET_ACTIVE_BUSINESS,
   CREATE_BUSINESS,
   GET_BUSINESS,
   UPDATE_BUSINESS,
   DELETE_BUSINESS
 } from "../constants";
 
-export const getBusinesses = () => {
+export const setActiveBusiness = (business) => {
   return {
-    type: GET_BUSINESSES
+    type: SET_ACTIVE_BUSINESS,
+    payload: business
   };
 };
 
-export const createBusiness = () => {
+export const createBusiness = (business) => {
   return {
-    type: CREATE_BUSINESS
+    type: CREATE_BUSINESS,
+    payload: business
   };
 };
 
@@ -24,9 +26,10 @@ export const getBusiness = () => {
   };
 };
 
-export const updateBusiness = () => {
+export const updateBusiness = (business) => {
   return {
-    type: UPDATE_BUSINESS
+    type: UPDATE_BUSINESS,
+    payload: business
   };
 };
 
