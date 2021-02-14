@@ -10,7 +10,7 @@ export default function business(
   state = { data: [], activeBusiness: null },
   action
 ) {
-  let data;
+  let data, filteredData;
   switch (action.type) {
     case SET_ACTIVE_BUSINESS:
       return {
@@ -19,7 +19,7 @@ export default function business(
       };
     case CREATE_BUSINESS:
       data = [...state.data];
-      const filteredData = data.filter(
+      filteredData = data.filter(
         (business) => business.name === action.payload.name
       );
       if (
@@ -55,7 +55,7 @@ export default function business(
       };
     case DELETE_BUSINESS:
       data = [...state.data];
-      const filteredData = data.filter(
+      filteredData = data.filter(
         (business) => business.id !== action.payload
       );
       return {
