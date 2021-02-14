@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-import { Grid, Container, Segment, Input, Tab } from "semantic-ui-react";
+import { Grid, Container, Segment, Form, Input, Tab } from "semantic-ui-react";
 import { BusinessForm, BusinessList } from "../components/Business";
 import { CategoryForm, CategoryList } from "../components/Category";
 import {
@@ -42,7 +42,7 @@ function Dashboard({
     if (!loggedIn) history.push("/login");
 
     if (businesses) {
-      const regex = new RegExp(businessSearch, "g");
+      const regex = new RegExp(businessSearch.trim(), "gi");
       const filteredBusinesses = businesses.filter(
         (business) =>
           business.name.match(regex) || business.description.match(regex)
@@ -52,7 +52,7 @@ function Dashboard({
     }
 
     if (categories) {
-      const regex = new RegExp(categorySearch, "g");
+      const regex = new RegExp(categorySearch.trim(), "gi");
       const filteredCategories = categories.filter((category) =>
         category.name.match(regex)
       );
@@ -74,66 +74,73 @@ function Dashboard({
     {
       menuItem: "Business",
       render: () => (
-        <>
-          <Input
-            fluid
-            value={businessSearch}
-            onInput={(e) => setBusinessSearch(e.target.value)}
-            placeholder="Search Business..."
-          />
-          <br />
-          <Grid columns={2}>
-            <Grid.Column mobile={16} computer={8}>
-              <BusinessList
-                activeBusiness={activeBusiness}
-                businesses={filteredBusinesses}
-                setActiveBusiness={setActiveBusiness}
-                deleteBusiness={deleteBusiness}
-              />
-            </Grid.Column>
-            <Grid.Column mobile={16} computer={8}>
-              <BusinessForm
-                activeBusiness={activeBusiness}
-                createBusiness={createBusiness}
-                updateBusiness={updateBusiness}
-                setActiveBusiness={setActiveBusiness}
-                options={categories}
-              />
-            </Grid.Column>
-          </Grid>
-        </>
+        <Grid columns={2}>
+          <Grid.Column mobile={16} computer={8}>
+            <Form>
+              <Form.Field>
+                <label>Search Business</label>
+                <Input
+                  fluid
+                  value={businessSearch}
+                  onInput={(e) => setBusinessSearch(e.target.value)}
+                  placeholder="Search Business"
+                />
+              </Form.Field>
+            </Form>
+
+            <br />
+            <BusinessList
+              activeBusiness={activeBusiness}
+              businesses={filteredBusinesses}
+              setActiveBusiness={setActiveBusiness}
+              deleteBusiness={deleteBusiness}
+            />
+          </Grid.Column>
+          <Grid.Column mobile={16} computer={8}>
+            <BusinessForm
+              activeBusiness={activeBusiness}
+              createBusiness={createBusiness}
+              updateBusiness={updateBusiness}
+              setActiveBusiness={setActiveBusiness}
+              options={categories}
+            />
+          </Grid.Column>
+        </Grid>
       )
     },
     {
       menuItem: "Category",
       render: () => (
-        <>
-          <Input
-            fluid
-            value={categorySearch}
-            onInput={(e) => setCategorySearch(e.target.value)}
-            placeholder="Search Category..."
-          />
-          <br />
-          <Grid columns={2}>
-            <Grid.Column mobile={16} computer={8}>
-              <CategoryList
-                activeCategory={activeCategory}
-                categories={filteredCategories}
-                setActiveCategory={setActiveCategory}
-                deleteCategory={deleteCategory}
-              />
-            </Grid.Column>
-            <Grid.Column mobile={16} computer={8}>
-              <CategoryForm
-                activeCategory={activeCategory}
-                createCategory={createCategory}
-                updateCategory={updateCategory}
-                setActiveCategory={setActiveCategory}
-              />
-            </Grid.Column>
-          </Grid>
-        </>
+        <Grid columns={2}>
+          <Grid.Column mobile={16} computer={8}>
+            <Form>
+              <Form.Field>
+                <label>Search Category</label>
+                <Input
+                  fluid
+                  value={categorySearch}
+                  onInput={(e) => setCategorySearch(e.target.value)}
+                  placeholder="Search Category"
+                />
+              </Form.Field>
+            </Form>
+            <br />
+            <CategoryList
+              activeCategory={activeCategory}
+              categories={filteredCategories}
+              setActiveCategory={setActiveCategory}
+              deleteCategory={deleteCategory}
+            />
+          </Grid.Column>
+          <Grid.Column mobile={16} computer={8}>
+            <CategoryForm
+              activeCategory={activeCategory}
+              createCategory={createCategory}
+              updateCategory={updateCategory}
+              setActiveCategory={setActiveCategory}
+            />
+          </Grid.Column>
+        </Grid>
       )
     }
   ];
@@ -143,7 +150,7 @@ function Dashboard({
       <Container>
         <Segment as="section" basic vertical>
           <Tab
-            menu={{ fluid: true, pointing: true, vertical: true }}
+            menu={{ fluid: true, vertical: true, tabular: true }}
             panes={panes}
           />
         </Segment>

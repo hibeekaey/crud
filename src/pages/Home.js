@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Container, Segment, Input } from "semantic-ui-react";
+import { Container, Segment, Form, Input } from "semantic-ui-react";
 import { BusinessList } from "../components/Business";
 
 function Home({ businesses }) {
@@ -9,7 +9,7 @@ function Home({ businesses }) {
   const [filteredBusinesses, setFilteredBusinesses] = useState(businesses);
 
   useEffect(() => {
-    const regex = new RegExp(search, "g");
+    const regex = new RegExp(search.trim(), "gi");
     const filteredBusinesses = businesses.filter(
       (business) =>
         business.name.match(regex) || business.description.match(regex)
@@ -23,12 +23,17 @@ function Home({ businesses }) {
       <Container>
         <div style={{ margin: "0 auto", maxWidth: 600 }}>
           <Segment as="section" basic vertical>
-            <Input
-              fluid
-              value={search}
-              onInput={(e) => setSearch(e.target.value)}
-              placeholder="Search..."
-            />
+            <Form>
+              <Form.Field>
+                <label>Search Business</label>
+                <Input
+                  fluid
+                  value={search}
+                  onInput={(e) => setSearch(e.target.value)}
+                  placeholder="Search Business"
+                />
+              </Form.Field>
+            </Form>
           </Segment>
           <Segment as="section" basic vertical>
             <BusinessList businesses={filteredBusinesses} />

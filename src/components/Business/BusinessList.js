@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Accordion, List, Label, Button, Confirm } from "semantic-ui-react";
+import { List, Card, Image, Label, Button, Confirm } from "semantic-ui-react";
 
 function BusinessList({
   activeBusiness,
@@ -8,20 +8,11 @@ function BusinessList({
   setActiveBusiness,
   deleteBusiness
 }) {
-  const [activeIndex, setActiveIndex] = useState(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  useEffect(() => {
-    if (!activeBusiness) setActiveIndex(null);
-  }, [activeBusiness, setActiveIndex]);
-
-  const handleClick = (e, titleProps) => {
-    const { index } = titleProps;
-    const newIndex = activeIndex === index ? -1 : index;
-
-    setActiveIndex(newIndex);
+  const handleClick = (index) => {
     if (setActiveBusiness) {
-      setActiveBusiness(businesses[newIndex]);
+      setActiveBusiness(businesses[index]);
     }
   };
 
@@ -34,57 +25,72 @@ function BusinessList({
   };
 
   return (
-    businesses &&
-    businesses.map((business, i) => (
-      <Accordion key={i} fluid styled>
-        <Accordion.Title
-          active={activeIndex === i}
-          index={i}
-          onClick={handleClick}
-        >
-          {business.name}
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === i}>
-          <List>
-            <List.Item icon="tint" content={business.description} />
-            <List.Item
-              icon="phone"
-              content={<a href={`tel:${business.phone}`}>{business.phone}</a>}
+    <Card.Group>
+      {businesses &&
+        businesses.map((business, i) => (
+          <Card fluid={deleteBusiness} key={i}>
+            <Image
+              src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+              wrapped
+              ui={false}
             />
-            <List.Item
-              icon="linkify"
-              content={
-                <a href={business.url} target="blank">
-                  {business.url}
-                </a>
-              }
-            />
-            <List.Item>
-              <Label.Group color="blue">
-                {business.categories &&
-                  business.categories.map((category) => (
-                    <Label as="a">{category}</Label>
-                  ))}
-              </Label.Group>
-            </List.Item>
+
+            <Card.Content>
+              <Card.Header>{business.name}</Card.Header>
+              <br />
+              <Card.Meta>
+                <List>
+                  <List.Item
+                    icon="phone"
+                    content={
+                      <a href={`tel:${business.phone}`}>{business.phone}</a>
+                    }
+                  />
+                  <List.Item
+                    icon="linkify"
+                    content={
+                      <a href={business.url} target="blank">
+                        {business.url}
+                      </a>
+                    }
+                  />
+                  <List.Item>
+                    <Label.Group color="blue">
+                      {business.categories &&
+                        business.categories.map((category, i) => (
+                          <Label key={i} as="a">
+                            {category}
+                          </Label>
+                        ))}
+                    </Label.Group>
+                  </List.Item>
+                </List>
+              </Card.Meta>
+              <Card.Description>{business.description}</Card.Description>
+            </Card.Content>
+
             {deleteBusiness && (
-              <List.Item>
-                <Button color="red" size="small" onClick={openConfirm}>
-                  Delete
-                </Button>
-                <Confirm
-                  open={confirmOpen}
-                  content="Are you sure you want to delete this Business?"
-                  confirmButton="Delete"
-                  onCancel={closeConfirm}
-                  onConfirm={() => removeBusiness(business.id)}
-                />
-              </List.Item>
+              <Card.Content extra>
+                <div className="ui two buttons">
+                  <Button basic color="green" onClick={() => handleClick(i)}>
+                    Edit
+                  </Button>
+                  <Button color="red" size="small" onClick={openConfirm}>
+                    Delete
+                  </Button>
+                  <Confirm
+                    open={confirmOpen}
+                    content="Are you sure you want to delete this Business?"
+                    confirmButton="Delete"
+                    onCancel={closeConfirm}
+                    onConfirm={() => removeBusiness(business.id)}
+                  />
+                </div>
+              </Card.Content>
             )}
-          </List>
-        </Accordion.Content>
-      </Accordion>
-    ))
+          </Card>
+        ))}
+    </Card.Group>
   );
 }
 

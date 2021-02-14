@@ -137,13 +137,15 @@ function BusinessForm({
           />
         </Form.Field>
       </Form.Group>
-      <Button color="blue" fluid type="submit">
-        {activeBusiness ? "Edit" : "Add"}
-      </Button>
-      <br />
-      <Button color="red" fluid type="reset" onClick={() => clearForm()}>
-        Clear
-      </Button>
+      <div className="ui two buttons">
+        <Button color="green" basic type="submit">
+          {activeBusiness ? "Edit" : "Add"}
+        </Button>
+        <br />
+        <Button color="red" type="reset" onClick={() => clearForm()}>
+          Clear
+        </Button>
+      </div>
     </Form>
   );
 }

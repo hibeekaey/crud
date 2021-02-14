@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Accordion, List, Button, Confirm } from "semantic-ui-react";
+import { Accordion, Icon, List, Button, Confirm } from "semantic-ui-react";
 
 function CategoryList({
   activeCategory,
@@ -40,13 +40,14 @@ function CategoryList({
           index={i}
           onClick={handleClick}
         >
+          <Icon name="dropdown" />
           {category.name}
         </Accordion.Title>
         <Accordion.Content active={activeIndex === i}>
           <List>
             {deleteCategory && (
               <List.Item>
-                <Button color="red" size="small" onClick={openConfirm}>
+                <Button color="red" fluid size="small" onClick={openConfirm}>
                   Delete
                 </Button>
                 <Confirm

@@ -1,31 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;1,600&display=swap");
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-a,
-input,
-textarea,
-button,
-div {
-  font-family: "Montserrat", sans-serif !important;
-}
-
 body {
   background-image: url("./assets/images/bg.jpg");
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 main {
-  padding: 50px 0;
+  padding: 20px 0;
 }

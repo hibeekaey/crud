@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Form, Input, Button } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 
 function CategoryForm({
   activeCategory,
@@ -42,22 +42,23 @@ function CategoryForm({
       }
     >
       <Form.Field>
-        <Input
+        <label>Category</label>
+        <input
+          type="text"
           value={category}
           onInput={(e) => setCategory(e.target.value)}
-          placeholder="Add Category"
-        >
-          <input />
-          <Button.Group attached='left'>
-            <Button color="blue" type="submit">
-              {activeCategory ? "Edit" : "Add"}
-            </Button>
-            <Button color="red" type="reset" onClick={() => clearForm()}>
-              Clear
-            </Button>
-          </Button.Group>
-        </Input>
+          placeholder="Category"
+        />
       </Form.Field>
+      <div className="ui two buttons">
+        <Button color="green" basic type="submit">
+          {activeCategory ? "Edit" : "Add"}
+        </Button>
+        <br />
+        <Button color="red" type="reset" onClick={() => clearForm()}>
+          Clear
+        </Button>
+      </div>
     </Form>
   );
 }
