@@ -48,12 +48,14 @@ function CategoryForm({
           placeholder="Add Category"
         >
           <input />
-          <Button color="blue" type="submit">
-            {activeCategory ? "Edit" : "Add"}
-          </Button>
-          <Button color="red" type="reset" onClick={() => clearForm()}>
-            Clear
-          </Button>
+          <Button.Group>
+            <Button color="blue" type="submit">
+              {activeCategory ? "Edit" : "Add"}
+            </Button>
+            <Button color="red" type="reset" onClick={() => clearForm()}>
+              Clear
+            </Button>
+          </Button.Group>
         </Input>
       </Form.Field>
     </Form>

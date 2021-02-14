@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Accordion, List, Button } from "semantic-ui-react";
+import { Accordion, List, Button, Confirm } from "semantic-ui-react";
 
 function BusinessList({
   activeBusiness,
@@ -9,6 +9,7 @@ function BusinessList({
   deleteBusiness
 }) {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   useEffect(() => {
     if (!activeBusiness) setActiveIndex(null);
@@ -22,6 +23,14 @@ function BusinessList({
     if (setActiveBusiness) {
       setActiveBusiness(businesses[newIndex]);
     }
+  };
+
+  const openConfirm = () => setConfirmOpen(true);
+  const closeConfirm = () => setConfirmOpen(false);
+
+  const removeBusiness = (id) => {
+    deleteBusiness(id);
+    closeConfirm();
   };
 
   return (
@@ -54,13 +63,16 @@ function BusinessList({
               <>
                 <br />
                 <List.Item>
-                  <Button
-                    color="red"
-                    size="small"
-                    onClick={() => deleteBusiness(business.id)}
-                  >
+                  <Button color="red" size="small" onClick={openConfirm}>
                     Delete
                   </Button>
+                  <Confirm
+                    open={confirmOpen}
+                    content="Are you sure you want to delete this Business?"
+                    confirmButton="Delete"
+                    onCancel={closeConfirm}
+                    onConfirm={() => removeBusiness(business.id)}
+                  />
                 </List.Item>
               </>
             )}
