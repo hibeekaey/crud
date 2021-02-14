@@ -54,7 +54,7 @@ export default function category(
       );
       return {
         ...state,
-        data,
+        data: filteredData,
         activeCategory: null
       };
     default:
