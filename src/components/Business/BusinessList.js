@@ -30,7 +30,11 @@ function BusinessList({
         businesses.map((business, i) => (
           <Card fluid={!!deleteBusiness} key={i}>
             <Image
-              src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+              src={
+                business.images && business.images.length
+                  ? business.images[business.images.length - 1]
+                  : "https://react.semantic-ui.com/images/avatar/large/matthew.png"
+              }
               wrapped
               ui={false}
             />

@@ -73,6 +73,24 @@ function BusinessForm({
     setImages([]);
   };
 
+  const getImage = (e) => {
+    e.preventDefault();
+
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    reader.onloadend = () => {
+      const image = reader.result;
+      setImages([...images, image]);
+    };
+
+    try {
+      reader.readAsDataURL(file);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const mappedOptions = options.map((category) => ({
     key: category.name.toLowerCase(),
     text: category.name,
@@ -157,6 +175,10 @@ function BusinessForm({
               onChange={(e, { value }) => setCategories(value)}
               required
             />
+          </Form.Field>
+          <Form.Field>
+            <label>Image</label>
+            <input type="file" onChange={getImage} placeholder="File" />
           </Form.Field>
         </Form.Group>
         <div className="ui two buttons">
