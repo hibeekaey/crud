@@ -33,8 +33,9 @@ export const updateCategory = (category) => {
   };
 };
 
-export const deleteCategory = () => {
+export const deleteCategory = (id) => {
   return {
-    type: DELETE_CATEGORY
+    type: DELETE_CATEGORY,
+    payload: id
   };
 };
