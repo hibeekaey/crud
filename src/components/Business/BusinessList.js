@@ -45,11 +45,11 @@ function BusinessList({ activeBusiness, businesses, setActiveBusiness, deleteBus
                 </a>
               }
             />
-            <List.Item>
-              <Button color="red" size=tiny" onClick={() => deleteBusiness(business.id)}>
+            {deleteBusiness && <List.Item>
+              <Button color="red" size="tiny" onClick={() => deleteBusiness(business.id)}>
                 Delete
               </Button>
-            </List.Item>
+            </List.Item>}
           </List>
         </Accordion.Content>
       </Accordion>
