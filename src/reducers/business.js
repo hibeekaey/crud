@@ -31,7 +31,9 @@ export default function business(
         action.payload.phone !== null &&
         action.payload.phone !== "" &&
         action.payload.url !== null &&
-        action.payload.url !== ""
+        action.payload.url !== "" &&
+        action.payload.categories &&
+        action.payload.categories.length
       ) {
         data.push({ id: v4(), ...action.payload });
       }

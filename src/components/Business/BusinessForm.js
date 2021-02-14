@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Dropdown } from "semantic-ui-react";
+import { Form, Message, Button, Dropdown } from "semantic-ui-react";
 
 function BusinessForm({
   activeBusiness,
@@ -15,6 +15,7 @@ function BusinessForm({
   const [url, setUrl] = useState("");
   const [categories, setCategories] = useState([]);
   const [images, setImages] = useState([]);
+  const [formError, setFormError] = useState(false);
 
   useEffect(() => {
     if (activeBusiness) {
@@ -42,14 +43,24 @@ function BusinessForm({
     setImages
   ]);
 
-  const addBusiness = (business) => {
-    createBusiness(business);
-    clearForm();
+  const addBusiness = async (business) => {
+    setFormError(false);
+    try {
+      await createBusiness(business);
+      clearForm();
+    } catch (e) {
+      setFormError(true);
+    }
   };
 
-  const editCategory = (category) => {
-    updateBusiness(category);
-    clearForm();
+  const editCategory = async (category) => {
+    setFormError(false);
+    try {
+      await updateBusiness(category);
+      clearForm();
+    } catch (e) {
+      setFormError(true);
+    }
   };
 
   const clearForm = () => {
@@ -69,84 +80,96 @@ function BusinessForm({
   }));
 
   return (
-    <Form
-      onSubmit={() =>
-        activeBusiness
-          ? editCategory({
-              id: activeBusiness.id,
-              name,
-              description,
-              phone,
-              url,
-              categories,
-              images
-            })
-          : addBusiness({ name, description, phone, url, categories, images })
-      }
-    >
-      <Form.Group widths="equal">
-        <Form.Field>
-          <label>Name</label>
-          <input
-            type="text"
-            value={name}
-            onInput={(e) => setName(e.target.value)}
-            placeholder="Name"
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Description</label>
-          <input
-            type="text"
-            value={description}
-            onInput={(e) => setDescription(e.target.value)}
-            placeholder="Description"
-          />
-        </Form.Field>
-      </Form.Group>
-      <Form.Group widths="equal">
-        <Form.Field>
-          <label>Phone</label>
-          <input
-            type="tel"
-            value={phone}
-            onInput={(e) => setPhone(e.target.value)}
-            placeholder="Phone"
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Url</label>
-          <input
-            type="url"
-            value={url}
-            onInput={(e) => setUrl(e.target.value)}
-            placeholder="Url"
-          />
-        </Form.Field>
-      </Form.Group>
-      <Form.Group widths="equal">
-        <Form.Field>
-          <label>Category</label>
-          <Dropdown
-            placeholder="Category"
-            multiple
-            selection
-            options={mappedOptions}
-            value={categories}
-            onChange={(e, { value }) => setCategories(value)}
-          />
-        </Form.Field>
-      </Form.Group>
-      <div className="ui two buttons">
-        <Button color="green" basic type="submit">
-          {activeBusiness ? "Edit" : "Add"}
-        </Button>
-        <br />
-        <Button color="red" type="reset" onClick={() => clearForm()}>
-          Clear
-        </Button>
-      </div>
-    </Form>
+    <>
+      {formError && (
+        <Message error size="small">
+          Please check details.
+        </Message>
+      )}
+      <Form
+        onSubmit={() =>
+          activeBusiness
+            ? editCategory({
+                id: activeBusiness.id,
+                name,
+                description,
+                phone,
+                url,
+                categories,
+                images
+              })
+            : addBusiness({ name, description, phone, url, categories, images })
+        }
+      >
+        <Form.Group widths="equal">
+          <Form.Field>
+            <label>Name</label>
+            <input
+              type="text"
+              value={name}
+              onInput={(e) => setName(e.target.value)}
+              placeholder="Name"
+              required
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Description</label>
+            <input
+              type="text"
+              value={description}
+              onInput={(e) => setDescription(e.target.value)}
+              placeholder="Description"
+              required
+            />
+          </Form.Field>
+        </Form.Group>
+        <Form.Group widths="equal">
+          <Form.Field>
+            <label>Phone</label>
+            <input
+              type="tel"
+              value={phone}
+              onInput={(e) => setPhone(e.target.value)}
+              placeholder="Phone"
+              required
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Url</label>
+            <input
+              type="url"
+              value={url}
+              onInput={(e) => setUrl(e.target.value)}
+              placeholder="Url"
+              required
+            />
+          </Form.Field>
+        </Form.Group>
+        <Form.Group widths="equal">
+          <Form.Field>
+            <label>Category</label>
+            <Dropdown
+              placeholder="Category"
+              multiple
+              selection
+              options={mappedOptions}
+              value={categories}
+              onChange={(e, { value }) => setCategories(value)}
+              required
+            />
+          </Form.Field>
+        </Form.Group>
+        <div className="ui two buttons">
+          <Button color="green" basic type="submit">
+            {activeBusiness ? "Edit" : "Add"}
+          </Button>
+          <br />
+          <Button color="red" type="reset" onClick={() => clearForm()}>
+            Clear
+          </Button>
+        </div>
+      </Form>
+    </>
   );
 }
 

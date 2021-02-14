@@ -8,11 +8,11 @@ import { CategoryForm, CategoryList } from "../components/Category";
 import {
   setActiveBusiness,
   createBusiness,
-  updateBusiness,
+  editBusiness,
   deleteBusiness,
   setActiveCategory,
   createCategory,
-  updateCategory,
+  editCategory,
   deleteCategory
 } from "../actions";
 
@@ -23,12 +23,12 @@ function Dashboard({
   activeBusiness,
   setActiveBusiness,
   createBusiness,
-  updateBusiness,
+  editBusiness,
   deleteBusiness,
   activeCategory,
   setActiveCategory,
   createCategory,
-  updateCategory,
+  editCategory,
   deleteCategory
 }) {
   const [businessSearch, setBusinessSearch] = useState("");
@@ -100,7 +100,7 @@ function Dashboard({
             <BusinessForm
               activeBusiness={activeBusiness}
               createBusiness={createBusiness}
-              updateBusiness={updateBusiness}
+              updateBusiness={editBusiness}
               setActiveBusiness={setActiveBusiness}
               options={categories}
             />
@@ -136,7 +136,7 @@ function Dashboard({
             <CategoryForm
               activeCategory={activeCategory}
               createCategory={createCategory}
-              updateCategory={updateCategory}
+              updateCategory={editCategory}
               setActiveCategory={setActiveCategory}
             />
           </Grid.Column>
@@ -168,12 +168,12 @@ Dashboard.propType = {
   loggedIn: PropTypes.bool.isRequired,
   activeBusiness: PropTypes.object.isRequired,
   setActiveBusiness: PropTypes.func.isRequired,
-  updateBusiness: PropTypes.func.isRequired,
+  editBusiness: PropTypes.func.isRequired,
   deleteBusiness: PropTypes.func.isRequired,
   businesses: PropTypes.array.isRequired,
   activeCategory: PropTypes.object.isRequired,
   setActiveCategory: PropTypes.func.isRequired,
-  updateCategory: PropTypes.func.isRequired,
+  editCategory: PropTypes.func.isRequired,
   deleteCategory: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired
 };
@@ -192,11 +192,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setActiveBusiness: (business) => dispatch(setActiveBusiness(business)),
     createBusiness: (business) => dispatch(createBusiness(business)),
-    updateBusiness: (business) => dispatch(updateBusiness(business)),
+    editBusiness: (business) => dispatch(editBusiness(business)),
     deleteBusiness: (id) => dispatch(deleteBusiness(id)),
     setActiveCategory: (category) => dispatch(setActiveCategory(category)),
     createCategory: (category) => dispatch(createCategory(category)),
-    updateCategory: (category) => dispatch(updateCategory(category)),
+    editCategory: (category) => dispatch(editCategory(category)),
     deleteCategory: (id) => dispatch(deleteCategory(id))
   };
 };

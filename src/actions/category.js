@@ -13,6 +13,19 @@ export const setActiveCategory = (category) => {
   };
 };
 
+export const addCategory = (category) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      if (category.name !== null && category.name !== "") {
+        dispatch(createCategory(category));
+        resolve(true);
+      } else {
+        reject(false);
+      }
+    });
+  };
+};
+
 export const createCategory = (category) => {
   return {
     type: CREATE_CATEGORY,
@@ -23,6 +36,19 @@ export const createCategory = (category) => {
 export const getCategory = () => {
   return {
     type: GET_CATEGORY
+  };
+};
+
+export const editCategory = (category) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      if (category.name !== null && category.name !== "") {
+        dispatch(updateCategory(category));
+        resolve(true);
+      } else {
+        reject(false);
+      }
+    });
   };
 };
 

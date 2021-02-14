@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Message, Button } from "semantic-ui-react";
 
 function CategoryForm({
   activeCategory,
@@ -9,6 +9,7 @@ function CategoryForm({
   setActiveCategory
 }) {
   const [category, setCategory] = useState("");
+  const [formError, setFormError] = useState(false);
 
   useEffect(() => {
     if (activeCategory) {
@@ -18,14 +19,24 @@ function CategoryForm({
     }
   }, [activeCategory, setCategory]);
 
-  const addCategory = (category) => {
-    createCategory(category);
-    clearForm();
+  const addCategory = async (category) => {
+    setFormError(false);
+    try {
+      await createCategory(category);
+      clearForm();
+    } catch (e) {
+      setFormError(true);
+    }
   };
 
-  const editCategory = (category) => {
-    updateCategory(category);
-    clearForm();
+  const editCategory = async (category) => {
+    setFormError(false);
+    try {
+      await updateCategory(category);
+      clearForm();
+    } catch (e) {
+      setFormError(true);
+    }
   };
 
   const clearForm = () => {
@@ -34,32 +45,40 @@ function CategoryForm({
   };
 
   return (
-    <Form
-      onSubmit={() =>
-        activeCategory
-          ? editCategory({ id: activeCategory.id, name: category })
-          : addCategory({ name: category })
-      }
-    >
-      <Form.Field>
-        <label>Category</label>
-        <input
-          type="text"
-          value={category}
-          onInput={(e) => setCategory(e.target.value)}
-          placeholder="Category"
-        />
-      </Form.Field>
-      <div className="ui two buttons">
-        <Button color="green" basic type="submit">
-          {activeCategory ? "Edit" : "Add"}
-        </Button>
-        <br />
-        <Button color="red" type="reset" onClick={() => clearForm()}>
-          Clear
-        </Button>
-      </div>
-    </Form>
+    <>
+      {formError && (
+        <Message error size="small">
+          Please check details.
+        </Message>
+      )}
+      <Form
+        onSubmit={() =>
+          activeCategory
+            ? editCategory({ id: activeCategory.id, name: category })
+            : addCategory({ name: category })
+        }
+      >
+        <Form.Field>
+          <label>Category</label>
+          <input
+            type="text"
+            value={category}
+            onInput={(e) => setCategory(e.target.value)}
+            placeholder="Category"
+            required
+          />
+        </Form.Field>
+        <div className="ui two buttons">
+          <Button color="green" basic type="submit">
+            {activeCategory ? "Edit" : "Add"}
+          </Button>
+          <br />
+          <Button color="red" type="reset" onClick={() => clearForm()}>
+            Clear
+          </Button>
+        </div>
+      </Form>
+    </>
   );
 }
 

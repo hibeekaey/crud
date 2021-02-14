@@ -13,6 +13,29 @@ export const setActiveBusiness = (business) => {
   };
 };
 
+export const addBusiness = (business) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      if (
+        business.name !== null &&
+        business.name !== "" &&
+        business.description !== null &&
+        business.description !== "" &&
+        business.phone !== null &&
+        business.phone !== "" &&
+        business.url !== null &&
+        business.categories &&
+        business.categories.length
+      ) {
+        dispatch(createBusiness(business));
+        resolve(true);
+      } else {
+        reject(false);
+      }
+    });
+  };
+};
+
 export const createBusiness = (business) => {
   return {
     type: CREATE_BUSINESS,
@@ -23,6 +46,29 @@ export const createBusiness = (business) => {
 export const getBusiness = () => {
   return {
     type: GET_BUSINESS
+  };
+};
+
+export const editBusiness = (business) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      if (
+        business.name !== null &&
+        business.name !== "" &&
+        business.description !== null &&
+        business.description !== "" &&
+        business.phone !== null &&
+        business.phone !== "" &&
+        business.url !== null &&
+        business.categories &&
+        business.categories.length
+      ) {
+        dispatch(updateBusiness(business));
+        resolve(true);
+      } else {
+        reject(false);
+      }
+    });
   };
 };
 
