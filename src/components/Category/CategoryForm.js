@@ -48,7 +48,7 @@ function CategoryForm({
           placeholder="Add Category"
         >
           <input />
-          <Button.Group>
+          <Button.Group attached='left'>
             <Button color="blue" type="submit">
               {activeCategory ? "Edit" : "Add"}
             </Button>
