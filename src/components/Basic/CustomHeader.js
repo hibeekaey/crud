@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function CustomHeader({ loggedIn, logout }) {
   return (
-    <Segment as="header" clearing vertical>
+    <Segment as="header" clearing vertical style={{ backgroundColor: "#fff" }}>
       <Container>
         <Menu as="nav" text size="small">
           <Menu.Item name="CRUD">

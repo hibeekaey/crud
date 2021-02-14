@@ -74,7 +74,7 @@ function Dashboard({
     {
       menuItem: "Business",
       render: () => (
-        <Grid columns={2}>
+        <Grid reversed="mobile vertically" columns={2}>
           <Grid.Column mobile={16} computer={8}>
             <Form>
               <Form.Field>
@@ -111,7 +111,7 @@ function Dashboard({
     {
       menuItem: "Category",
       render: () => (
-        <Grid columns={2}>
+        <Grid reversed="mobile vertically" columns={2}>
           <Grid.Column mobile={16} computer={8}>
             <Form>
               <Form.Field>

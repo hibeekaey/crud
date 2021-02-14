@@ -25,7 +25,7 @@ function BusinessList({
   };
 
   return (
-    <Card.Group>
+    <Card.Group centered>
       {businesses &&
         businesses.map((business, i) => (
           <Card fluid={deleteBusiness} key={i}>
