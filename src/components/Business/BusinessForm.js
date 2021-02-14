@@ -102,7 +102,7 @@ function BusinessForm({
         }
       >
         <Form.Group widths="equal">
-          <Form.Field>
+          <Form.Field required>
             <label>Name</label>
             <input
               type="text"
@@ -112,7 +112,7 @@ function BusinessForm({
               required
             />
           </Form.Field>
-          <Form.Field>
+          <Form.Field required>
             <label>Description</label>
             <input
               type="text"
@@ -124,7 +124,7 @@ function BusinessForm({
           </Form.Field>
         </Form.Group>
         <Form.Group widths="equal">
-          <Form.Field>
+          <Form.Field required>
             <label>Phone</label>
             <input
               type="tel"
@@ -134,7 +134,7 @@ function BusinessForm({
               required
             />
           </Form.Field>
-          <Form.Field>
+          <Form.Field required>
             <label>Url</label>
             <input
               type="url"
@@ -146,7 +146,7 @@ function BusinessForm({
           </Form.Field>
         </Form.Group>
         <Form.Group widths="equal">
-          <Form.Field>
+          <Form.Field required>
             <label>Category</label>
             <Dropdown
               placeholder="Category"

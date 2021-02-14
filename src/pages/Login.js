@@ -41,7 +41,7 @@ function Login({ loggedIn, login }) {
             </Message>
           )}
           <Form onSubmit={() => loginAdmin(email, password)}>
-            <Form.Field>
+            <Form.Field required>
               <label>Email</label>
               <input
                 type="email"
@@ -51,7 +51,7 @@ function Login({ loggedIn, login }) {
                 required
               />
             </Form.Field>
-            <Form.Field>
+            <Form.Field required>
               <label>Password</label>
               <input
                 type="password"
