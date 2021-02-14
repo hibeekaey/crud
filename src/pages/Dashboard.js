@@ -16,9 +16,11 @@ import {
   setActiveBusiness,
   createBusiness,
   updateBusiness,
+  deleteBusiness,
   setActiveCategory,
   createCategory,
-  updateCategory
+  updateCategory,
+  deleteCategory
 } from "../actions";
 
 function Dashboard({
@@ -29,10 +31,12 @@ function Dashboard({
   setActiveBusiness,
   createBusiness,
   updateBusiness,
+  deleteBusiness,
   activeCategory,
   setActiveCategory,
   createCategory,
-  updateCategory
+  updateCategory,
+  deleteCategory
 }) {
   const history = useHistory();
 
@@ -58,6 +62,7 @@ function Dashboard({
                 activeBusiness={activeBusiness}
                 businesses={businesses}
                 setActiveBusiness={setActiveBusiness}
+                deleteBusiness={deleteBusiness}
               />
             </Grid.Column>
             <Grid.Column mobile={16} computer={8}>
@@ -89,6 +94,7 @@ function Dashboard({
                 activeCategory={activeCategory}
                 categories={categories}
                 setActiveCategory={setActiveCategory}
+                deleteCategory={deleteCategory}
               />
             </Grid.Column>
             <Grid.Column mobile={16} computer={8}>
@@ -124,10 +130,12 @@ Dashboard.propType = {
   activeBusiness: PropTypes.object.isRequired,
   setActiveBusiness: PropTypes.func.isRequired,
   updateBusiness: PropTypes.func.isRequired,
+  deleteBusiness: PropTypes.func.isRequired,
   businesses: PropTypes.array.isRequired,
   activeCategory: PropTypes.object.isRequired,
   setActiveCategory: PropTypes.func.isRequired,
   updateCategory: PropTypes.func.isRequired,
+  deleteCategory: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired
 };
 
@@ -146,9 +154,11 @@ const mapDispatchToProps = (dispatch) => {
     setActiveBusiness: (business) => dispatch(setActiveBusiness(business)),
     createBusiness: (business) => dispatch(createBusiness(business)),
     updateBusiness: (business) => dispatch(updateBusiness(business)),
+    deleteBusiness: (id) => dispatch(deleteBusiness(id)),
     setActiveCategory: (category) => dispatch(setActiveCategory(category)),
     createCategory: (category) => dispatch(createCategory(category)),
-    updateCategory: (category) => dispatch(updateCategory(category))
+    updateCategory: (category) => dispatch(updateCategory(category)),
+    deleteCategory: (id) => dispatch(deleteCategory(id))
   };
 };
 
