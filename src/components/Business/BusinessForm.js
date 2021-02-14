@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Form, Button } from "semantic-ui-react";
 
-function BusinessForm({ activeBusiness, createBusiness, updateBusiness }) {
+function BusinessForm({
+  activeBusiness,
+  createBusiness,
+  updateBusiness,
+  setActiveBusiness
+}) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [phone, setPhone] = useState("");
@@ -38,16 +43,16 @@ function BusinessForm({ activeBusiness, createBusiness, updateBusiness }) {
 
   const addBusiness = (business) => {
     createBusiness(business);
-    setName("");
-    setDescription("");
-    setPhone("");
-    setUrl("");
-    setCategories([]);
-    setImages([]);
+    clearForm();
   };
 
   const editCategory = (category) => {
     updateBusiness(category);
+    clearForm();
+  };
+
+  const clearForm = () => {
+    setActiveBusiness(null);
     setName("");
     setDescription("");
     setPhone("");
@@ -115,6 +120,10 @@ function BusinessForm({ activeBusiness, createBusiness, updateBusiness }) {
       <Button fluid type="submit">
         {activeBusiness ? "Edit" : "Add"}
       </Button>
+      <br />
+      <Button fluid type="reset" onClick={() => clearForm()}>
+        Clear
+      </Button>
     </Form>
   );
 }
@@ -122,7 +131,8 @@ function BusinessForm({ activeBusiness, createBusiness, updateBusiness }) {
 BusinessForm.propType = {
   activeBusiness: PropTypes.string.isRequired,
   createBusiness: PropTypes.func.isRequired,
-  updateBusiness: PropTypes.func.isRequired
+  updateBusiness: PropTypes.func.isRequired,
+  setActiveBusiness: PropTypes.func.isRequired
 };
 
 export default BusinessForm;

@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Form, Input, Button } from "semantic-ui-react";
 
-function CategoryForm({ activeCategory, createCategory, updateCategory }) {
+function CategoryForm({
+  activeCategory,
+  createCategory,
+  updateCategory,
+  setActiveCategory
+}) {
   const [category, setCategory] = useState("");
 
   useEffect(() => {
@@ -15,11 +20,16 @@ function CategoryForm({ activeCategory, createCategory, updateCategory }) {
 
   const addCategory = (category) => {
     createCategory(category);
-    setCategory("");
+    clearForm();
   };
 
   const editCategory = (category) => {
     updateCategory(category);
+    clearForm();
+  };
+
+  const clearForm = () => {
+    setActiveCategory(null);
     setCategory("");
   };
 
@@ -40,6 +50,9 @@ function CategoryForm({ activeCategory, createCategory, updateCategory }) {
         >
           <input />
           <Button type="submit">{activeCategory ? "Edit" : "Add"}</Button>
+          <Button type="reset" onClick={() => clearForm()}>
+            Clear
+          </Button>
         </Input>
       </Form.Field>
     </Form>
@@ -49,7 +62,8 @@ function CategoryForm({ activeCategory, createCategory, updateCategory }) {
 CategoryForm.propType = {
   activeCategory: PropTypes.string.isRequired,
   createCategory: PropTypes.func.isRequired,
-  updateCategory: PropTypes.func.isRequired
+  updateCategory: PropTypes.func.isRequired,
+  setActiveCategory: PropTypes.func.isRequired
 };
 
 export default CategoryForm;

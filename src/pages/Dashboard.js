@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-import { Container, Segment, Input, Tab } from "semantic-ui-react";
+import { Grid, Container, Segment, Input, Tab } from "semantic-ui-react";
 import { BusinessForm, BusinessList } from "../components/Business";
 import { CategoryForm, CategoryList } from "../components/Category";
 import {
@@ -37,37 +37,45 @@ function Dashboard({
     {
       menuItem: "Business",
       render: () => (
-        <>
-          <BusinessForm
-            activeBusiness={activeBusiness}
-            createBusiness={createBusiness}
-            updateBusiness={updateBusiness}
-          />
-          <br />
-          <BusinessList
-            activeBusiness={activeBusiness}
-            businesses={businesses}
-            setActiveBusiness={setActiveBusiness}
-          />
-        </>
+        <Grid columns={2}>
+          <Grid.Column mobile={16} computer={8}>
+            <BusinessList
+              activeBusiness={activeBusiness}
+              businesses={businesses}
+              setActiveBusiness={setActiveBusiness}
+            />
+          </Grid.Column>
+          <Grid.Column mobile={16} computer={8}>
+            <BusinessForm
+              activeBusiness={activeBusiness}
+              createBusiness={createBusiness}
+              updateBusiness={updateBusiness}
+              setActiveBusiness={setActiveBusiness}
+            />
+          </Grid.Column>
+        </Grid>
       )
     },
     {
       menuItem: "Category",
       render: () => (
-        <>
-          <CategoryForm
-            activeCategory={activeCategory}
-            createCategory={createCategory}
-            updateCategory={updateCategory}
-          />
-          <br />
-          <CategoryList
-            activeCategory={activeCategory}
-            categories={categories}
-            setActiveCategory={setActiveCategory}
-          />
-        </>
+        <Grid columns={2}>
+          <Grid.Column mobile={16} computer={8}>
+            <CategoryList
+              activeCategory={activeCategory}
+              categories={categories}
+              setActiveCategory={setActiveCategory}
+            />
+          </Grid.Column>
+          <Grid.Column mobile={16} computer={8}>
+            <CategoryForm
+              activeCategory={activeCategory}
+              createCategory={createCategory}
+              updateCategory={updateCategory}
+              setActiveCategory={setActiveCategory}
+            />
+          </Grid.Column>
+        </Grid>
       )
     }
   ];
