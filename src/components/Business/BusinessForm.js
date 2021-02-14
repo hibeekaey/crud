@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Dropdown } from "semantic-ui-react";
 
 function BusinessForm({
   activeBusiness,
   createBusiness,
   updateBusiness,
-  setActiveBusiness
+  setActiveBusiness,
+  options
 }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -60,6 +61,12 @@ function BusinessForm({
     setCategories([]);
     setImages([]);
   };
+
+  const mappedOptions = options.map((category) => ({
+    key: category.name.toLowerCase(),
+    text: category.name,
+    value: category.name.toLowerCase()
+  }));
 
   return (
     <Form
@@ -117,6 +124,19 @@ function BusinessForm({
           />
         </Form.Field>
       </Form.Group>
+      <Form.Group widths="equal">
+        <Form.Field>
+          <label>Category</label>
+          <Dropdown
+            placeholder="Category"
+            multiple
+            selection
+            options={mappedOptions}
+            value={categories}
+            onChange={(e, { value }) => setCategories(value)}
+          />
+        </Form.Field>
+      </Form.Group>
       <Button color="blue" fluid type="submit">
         {activeBusiness ? "Edit" : "Add"}
       </Button>
@@ -132,7 +152,8 @@ BusinessForm.propType = {
   activeBusiness: PropTypes.string.isRequired,
   createBusiness: PropTypes.func.isRequired,
   updateBusiness: PropTypes.func.isRequired,
-  setActiveBusiness: PropTypes.func.isRequired
+  setActiveBusiness: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired
 };
 
 export default BusinessForm;

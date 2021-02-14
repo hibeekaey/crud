@@ -97,6 +97,7 @@ function Dashboard({
                 createBusiness={createBusiness}
                 updateBusiness={updateBusiness}
                 setActiveBusiness={setActiveBusiness}
+                options={categories}
               />
             </Grid.Column>
           </Grid>

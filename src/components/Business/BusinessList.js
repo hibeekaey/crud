@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Accordion, List, Button, Confirm } from "semantic-ui-react";
+import { Accordion, List, Label, Button, Confirm } from "semantic-ui-react";
 
 function BusinessList({
   activeBusiness,
@@ -59,22 +59,27 @@ function BusinessList({
                 </a>
               }
             />
+            <List.Item>
+              <Label.Group color="blue">
+                {business.categories &&
+                  business.categories.map((category) => (
+                    <Label as="a">{category}</Label>
+                  ))}
+              </Label.Group>
+            </List.Item>
             {deleteBusiness && (
-              <>
-                <br />
-                <List.Item>
-                  <Button color="red" size="small" onClick={openConfirm}>
-                    Delete
-                  </Button>
-                  <Confirm
-                    open={confirmOpen}
-                    content="Are you sure you want to delete this Business?"
-                    confirmButton="Delete"
-                    onCancel={closeConfirm}
-                    onConfirm={() => removeBusiness(business.id)}
-                  />
-                </List.Item>
-              </>
+              <List.Item>
+                <Button color="red" size="small" onClick={openConfirm}>
+                  Delete
+                </Button>
+                <Confirm
+                  open={confirmOpen}
+                  content="Are you sure you want to delete this Business?"
+                  confirmButton="Delete"
+                  onCancel={closeConfirm}
+                  onConfirm={() => removeBusiness(business.id)}
+                />
+              </List.Item>
             )}
           </List>
         </Accordion.Content>
