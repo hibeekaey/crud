@@ -1,8 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createRef } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-import { Grid, Container, Segment, Form, Input, Tab } from "semantic-ui-react";
+import {
+  Grid,
+  Container,
+  Segment,
+  Form,
+  Input,
+  Tab,
+  Sticky,
+  Ref
+} from "semantic-ui-react";
 import { BusinessForm, BusinessList } from "../components/Business";
 import { CategoryForm, CategoryList } from "../components/Category";
 import {
@@ -37,6 +46,7 @@ function Dashboard({
   const [filteredCategories, setFilteredCategories] = useState(categories);
 
   const history = useHistory();
+  const contextRef = createRef();
 
   useEffect(() => {
     if (!loggedIn) history.push("/login");
@@ -74,85 +84,96 @@ function Dashboard({
     {
       menuItem: "Businesses",
       render: () => (
-        <Grid reversed="tablet vertically" columns={2}>
-          <Grid.Column mobile={16} computer={8}>
-            <Form>
-              <Form.Field>
-                <label>Search Business</label>
-                <Input
-                  fluid
-                  icon={{
-                    name: "close",
-                    circular: true,
-                    link: true,
-                    onClick: () => setBusinessSearch("")
-                  }}
-                  value={businessSearch}
-                  onInput={(e) => setBusinessSearch(e.target.value)}
-                  placeholder="Search Business"
+        <Ref innerRef={contextRef}>
+          <Grid reversed="mobile vertically" columns={2}>
+            <Grid.Column mobile={16} computer={8}>
+              <Sticky context={contextRef}>
+                <Form style={{ backgroundColor: "#f5f5f5", padding: "10px 0" }}>
+                  <Form.Field>
+                    <label>Search Business</label>
+                    <Input
+                      fluid
+                      icon={{
+                        name: "close",
+                        circular: true,
+                        link: true,
+                        onClick: () => setBusinessSearch("")
+                      }}
+                      value={businessSearch}
+                      onInput={(e) => setBusinessSearch(e.target.value)}
+                      placeholder="Search Business"
+                    />
+                  </Form.Field>
+                </Form>
+              </Sticky>
+              <br />
+              <BusinessList
+                activeBusiness={activeBusiness}
+                businesses={filteredBusinesses}
+                setActiveBusiness={setActiveBusiness}
+                deleteBusiness={deleteBusiness}
+              />
+            </Grid.Column>
+            <Grid.Column mobile={16} computer={8}>
+              <Sticky context={contextRef}>
+                <BusinessForm
+                  activeBusiness={activeBusiness}
+                  createBusiness={createBusiness}
+                  updateBusiness={editBusiness}
+                  setActiveBusiness={setActiveBusiness}
+                  options={categories}
                 />
-              </Form.Field>
-            </Form>
-
-            <br />
-            <BusinessList
-              activeBusiness={activeBusiness}
-              businesses={filteredBusinesses}
-              setActiveBusiness={setActiveBusiness}
-              deleteBusiness={deleteBusiness}
-            />
-          </Grid.Column>
-          <Grid.Column mobile={16} computer={8}>
-            <BusinessForm
-              activeBusiness={activeBusiness}
-              createBusiness={createBusiness}
-              updateBusiness={editBusiness}
-              setActiveBusiness={setActiveBusiness}
-              options={categories}
-            />
-          </Grid.Column>
-        </Grid>
+              </Sticky>
+            </Grid.Column>
+          </Grid>
+        </Ref>
       )
     },
     {
       menuItem: "Categories",
       render: () => (
-        <Grid reversed="tablet vertically" columns={2}>
-          <Grid.Column mobile={16} computer={8}>
-            <Form>
-              <Form.Field>
-                <label>Search Category</label>
-                <Input
-                  fluid
-                  icon={{
-                    name: "close",
-                    circular: true,
-                    link: true,
-                    onClick: () => setCategorySearch("")
-                  }}
-                  value={categorySearch}
-                  onInput={(e) => setCategorySearch(e.target.value)}
-                  placeholder="Search Category"
+        <Ref innerRef={contextRef}>
+          <Grid reversed="mobile vertically" columns={2}>
+            <Grid.Column mobile={16} computer={8}>
+              <Sticky context={contextRef}>
+                <Form style={{ backgroundColor: "#f5f5f5", padding: "10px 0" }}>
+                  <Form.Field>
+                    <label>Search Category</label>
+                    <Input
+                      fluid
+                      icon={{
+                        name: "close",
+                        circular: true,
+                        link: true,
+                        onClick: () => setCategorySearch("")
+                      }}
+                      value={categorySearch}
+                      onInput={(e) => setCategorySearch(e.target.value)}
+                      placeholder="Search Category"
+                    />
+                  </Form.Field>
+                </Form>
+              </Sticky>
+              <br />
+              <CategoryList
+                activeCategory={activeCategory}
+                categories={filteredCategories}
+                setActiveCategory={setActiveCategory}
+                deleteCategory={deleteCategory}
+              />
+            </Grid.Column>
+            <Grid.Column mobile={16} computer={8}>
+              <Sticky context={contextRef}>
+                <CategoryForm
+                  activeCategory={activeCategory}
+                  createCategory={createCategory}
+                  updateCategory={editCategory}
+                  setActiveCategory={setActiveCategory}
                 />
-              </Form.Field>
-            </Form>
-            <br />
-            <CategoryList
-              activeCategory={activeCategory}
-              categories={filteredCategories}
-              setActiveCategory={setActiveCategory}
-              deleteCategory={deleteCategory}
-            />
-          </Grid.Column>
-          <Grid.Column mobile={16} computer={8}>
-            <CategoryForm
-              activeCategory={activeCategory}
-              createCategory={createCategory}
-              updateCategory={editCategory}
-              setActiveCategory={setActiveCategory}
-            />
-          </Grid.Column>
-        </Grid>
+              </Sticky>
+            </Grid.Column>
+          </Grid>
+        </Ref>
       )
     }
   ];

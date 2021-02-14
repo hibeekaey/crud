@@ -80,7 +80,7 @@ function BusinessForm({
   }));
 
   return (
-    <>
+    <div style={{ backgroundColor: "#f5f5f5", padding: "10px 0" }}>
       {formError && (
         <Message error size="small">
           Please check details.
@@ -169,7 +169,7 @@ function BusinessForm({
           </Button>
         </div>
       </Form>
-    </>
+    </div>
   );
 }
 
