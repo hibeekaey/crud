@@ -50,7 +50,7 @@ export default function category(
     case DELETE_CATEGORY:
       data = [...state.data];
       filteredData = data.filter(
-        (category) => category.id === action.payload
+        (category) => category.id !== action.payload
       );
       return {
         ...state,
