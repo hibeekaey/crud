@@ -45,8 +45,9 @@ function BusinessList({ activeBusiness, businesses, setActiveBusiness, deleteBus
                 </a>
               }
             />
+            <br />
             {deleteBusiness && <List.Item>
-              <Button color="red" size="tiny" onClick={() => deleteBusiness(business.id)}>
+              <Button color="red" size="small" onClick={() => deleteBusiness(business.id)}>
                 Delete
               </Button>
             </List.Item>}
