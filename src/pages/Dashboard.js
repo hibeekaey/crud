@@ -1,15 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-import {
-  Grid,
-  Container,
-  Segment,
-  Input,
-  Tab,
-  Button
-} from "semantic-ui-react";
+import { Grid, Container, Segment, Input, Tab } from "semantic-ui-react";
 import { BusinessForm, BusinessList } from "../components/Business";
 import { CategoryForm, CategoryList } from "../components/Category";
 import {
@@ -38,29 +31,62 @@ function Dashboard({
   updateCategory,
   deleteCategory
 }) {
+  const [businessSearch, setBusinessSearch] = useState("");
+  const [categorySearch, setCategorySearch] = useState("");
+  const [filteredBusinesses, setFilteredBusinesses] = useState(businesses);
+  const [filteredCategories, setFilteredCategories] = useState(categories);
+
   const history = useHistory();
 
   useEffect(() => {
     if (!loggedIn) history.push("/login");
-  }, [loggedIn, history]);
+
+    if (businesses) {
+      const regex = new RegExp(businessSearch, "g");
+      const filteredBusinesses = businesses.filter(
+        (business) =>
+          business.name.match(regex) || business.description.match(regex)
+      );
+
+      setFilteredBusinesses(filteredBusinesses);
+    }
+
+    if (categories) {
+      const regex = new RegExp(categorySearch, "g");
+      const filteredCategories = categories.filter((category) =>
+        category.name.match(regex)
+      );
+
+      setFilteredCategories(filteredCategories);
+    }
+  }, [
+    loggedIn,
+    businessSearch,
+    businesses,
+    setFilteredBusinesses,
+    categorySearch,
+    categories,
+    setFilteredCategories,
+    history
+  ]);
 
   const panes = [
     {
       menuItem: "Business",
       render: () => (
         <>
-          <Input fluid placeholder="Search Business...">
-            <input />
-            <Button color="blue" type="submit">
-              Search
-            </Button>
-          </Input>
+          <Input
+            fluid
+            value={businessSearch}
+            onInput={(e) => setBusinessSearch(e.target.value)}
+            placeholder="Search Business..."
+          />
           <br />
           <Grid columns={2}>
             <Grid.Column mobile={16} computer={8}>
               <BusinessList
                 activeBusiness={activeBusiness}
-                businesses={businesses}
+                businesses={filteredBusinesses}
                 setActiveBusiness={setActiveBusiness}
                 deleteBusiness={deleteBusiness}
               />
@@ -81,18 +107,18 @@ function Dashboard({
       menuItem: "Category",
       render: () => (
         <>
-          <Input fluid placeholder="Search Category...">
-            <input />
-            <Button color="blue" type="submit">
-              Search
-            </Button>
-          </Input>
+          <Input
+            fluid
+            value={categorySearch}
+            onInput={(e) => setCategorySearch(e.target.value)}
+            placeholder="Search Category..."
+          />
           <br />
           <Grid columns={2}>
             <Grid.Column mobile={16} computer={8}>
               <CategoryList
                 activeCategory={activeCategory}
-                categories={categories}
+                categories={filteredCategories}
                 setActiveCategory={setActiveCategory}
                 deleteCategory={deleteCategory}
               />
