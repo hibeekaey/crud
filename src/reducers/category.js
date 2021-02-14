@@ -10,7 +10,7 @@ export default function category(
   state = { data: [], activeCategory: null },
   action
 ) {
-  let data;
+  let data, filteredData;
   switch (action.type) {
     case SET_ACTIVE_CATEGORY:
       return {
@@ -19,7 +19,7 @@ export default function category(
       };
     case CREATE_CATEGORY:
       data = [...state.data];
-      const filteredData = data.filter(
+      filteredData = data.filter(
         (category) => category.name === action.payload.name
       );
       if (
@@ -49,7 +49,7 @@ export default function category(
       };
     case DELETE_CATEGORY:
       data = [...state.data];
-      const filteredData = data.filter(
+      filteredData = data.filter(
         (category) => category.id === action.payload
       );
       return {
