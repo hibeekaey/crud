@@ -55,9 +55,7 @@ export default function business(
       };
     case DELETE_BUSINESS:
       data = [...state.data];
-      filteredData = data.filter(
-        (business) => business.id !== action.payload
-      );
+      filteredData = data.filter((business) => business.id !== action.payload);
       return {
         ...state,
         data: filteredData,

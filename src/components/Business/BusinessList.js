@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Accordion, List, Button } from "semantic-ui-react";
 
-function BusinessList({ activeBusiness, businesses, setActiveBusiness, deleteBusiness }) {
+function BusinessList({
+  activeBusiness,
+  businesses,
+  setActiveBusiness,
+  deleteBusiness
+}) {
   const [activeIndex, setActiveIndex] = useState(null);
 
   useEffect(() => {
@@ -46,11 +51,17 @@ function BusinessList({ activeBusiness, businesses, setActiveBusiness, deleteBus
               }
             />
             <br />
-            {deleteBusiness && <List.Item>
-              <Button color="red" size="small" onClick={() => deleteBusiness(business.id)}>
-                Delete
-              </Button>
-            </List.Item>}
+            {deleteBusiness && (
+              <List.Item>
+                <Button
+                  color="red"
+                  size="small"
+                  onClick={() => deleteBusiness(business.id)}
+                >
+                  Delete
+                </Button>
+              </List.Item>
+            )}
           </List>
         </Accordion.Content>
       </Accordion>
