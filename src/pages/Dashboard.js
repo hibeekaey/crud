@@ -2,7 +2,14 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-import { Grid, Container, Segment, Input, Tab } from "semantic-ui-react";
+import {
+  Grid,
+  Container,
+  Segment,
+  Input,
+  Tab,
+  Button
+} from "semantic-ui-react";
 import { BusinessForm, BusinessList } from "../components/Business";
 import { CategoryForm, CategoryList } from "../components/Category";
 import {
@@ -37,45 +44,63 @@ function Dashboard({
     {
       menuItem: "Business",
       render: () => (
-        <Grid columns={2}>
-          <Grid.Column mobile={16} computer={8}>
-            <BusinessList
-              activeBusiness={activeBusiness}
-              businesses={businesses}
-              setActiveBusiness={setActiveBusiness}
-            />
-          </Grid.Column>
-          <Grid.Column mobile={16} computer={8}>
-            <BusinessForm
-              activeBusiness={activeBusiness}
-              createBusiness={createBusiness}
-              updateBusiness={updateBusiness}
-              setActiveBusiness={setActiveBusiness}
-            />
-          </Grid.Column>
-        </Grid>
+        <>
+          <Input fluid action="Search" placeholder="Search Business...">
+            <input />
+            <Button color="primary" type="submit">
+              Search
+            </Button>
+          </Input>
+          <br />
+          <Grid columns={2}>
+            <Grid.Column mobile={16} computer={8}>
+              <BusinessList
+                activeBusiness={activeBusiness}
+                businesses={businesses}
+                setActiveBusiness={setActiveBusiness}
+              />
+            </Grid.Column>
+            <Grid.Column mobile={16} computer={8}>
+              <BusinessForm
+                activeBusiness={activeBusiness}
+                createBusiness={createBusiness}
+                updateBusiness={updateBusiness}
+                setActiveBusiness={setActiveBusiness}
+              />
+            </Grid.Column>
+          </Grid>
+        </>
       )
     },
     {
       menuItem: "Category",
       render: () => (
-        <Grid columns={2}>
-          <Grid.Column mobile={16} computer={8}>
-            <CategoryList
-              activeCategory={activeCategory}
-              categories={categories}
-              setActiveCategory={setActiveCategory}
-            />
-          </Grid.Column>
-          <Grid.Column mobile={16} computer={8}>
-            <CategoryForm
-              activeCategory={activeCategory}
-              createCategory={createCategory}
-              updateCategory={updateCategory}
-              setActiveCategory={setActiveCategory}
-            />
-          </Grid.Column>
-        </Grid>
+        <>
+          <Input fluid action="Search" placeholder="Search Category...">
+            <input />
+            <Button color="primary" type="submit">
+              Search
+            </Button>
+          </Input>
+          <br />
+          <Grid columns={2}>
+            <Grid.Column mobile={16} computer={8}>
+              <CategoryList
+                activeCategory={activeCategory}
+                categories={categories}
+                setActiveCategory={setActiveCategory}
+              />
+            </Grid.Column>
+            <Grid.Column mobile={16} computer={8}>
+              <CategoryForm
+                activeCategory={activeCategory}
+                createCategory={createCategory}
+                updateCategory={updateCategory}
+                setActiveCategory={setActiveCategory}
+              />
+            </Grid.Column>
+          </Grid>
+        </>
       )
     }
   ];
@@ -83,9 +108,6 @@ function Dashboard({
   return (
     <main>
       <Container>
-        <Segment as="section" basic vertical>
-          <Input fluid action="Search" placeholder="Search..." />
-        </Segment>
         <Segment as="section" basic vertical>
           <Tab
             menu={{ fluid: true, pointing: true, vertical: true }}

@@ -11,7 +11,7 @@ function CustomHeader({ loggedIn, logout }) {
           <Menu.Item name="CRUD">
             <Link
               to="/"
-              style={{ fontSize: 32, fontWeight: 600, color: "#333" }}
+              style={{ fontSize: 32, fontWeight: 600, color: "#2185d0" }}
             >
               CRUD
             </Link>

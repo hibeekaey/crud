@@ -18,7 +18,12 @@ function Login({ loggedIn, login }) {
     <main>
       <Container>
         <Segment as="section" basic vertical>
-          <Form onSubmit={() => login(email, password)}>
+          <h1 style={{ textAlign: "center" }}>Admin Login</h1>
+          <br />
+          <Form
+            onSubmit={() => login(email, password)}
+            style={{ margin: "0 auto", maxWidth: 600 }}
+          >
             <Form.Field>
               <label>Email</label>
               <input
@@ -37,7 +42,8 @@ function Login({ loggedIn, login }) {
                 placeholder="Password"
               />
             </Form.Field>
-            <Button fluid type="submit">
+            <br />
+            <Button fluid color="primary" type="submit">
               Login
             </Button>
           </Form>

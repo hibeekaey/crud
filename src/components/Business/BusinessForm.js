@@ -117,11 +117,11 @@ function BusinessForm({
           />
         </Form.Field>
       </Form.Group>
-      <Button fluid type="submit">
+      <Button color="primary" fluid type="submit">
         {activeBusiness ? "Edit" : "Add"}
       </Button>
       <br />
-      <Button fluid type="reset" onClick={() => clearForm()}>
+      <Button color="red" fluid type="reset" onClick={() => clearForm()}>
         Clear
       </Button>
     </Form>

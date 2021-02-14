@@ -19,3 +19,7 @@ button,
 div {
   font-family: "Montserrat", sans-serif !important;
 }
+
+main {
+  padding: 50px 0;
+}

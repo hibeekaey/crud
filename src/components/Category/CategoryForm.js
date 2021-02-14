@@ -49,8 +49,8 @@ function CategoryForm({
           action
         >
           <input />
-          <Button type="submit">{activeCategory ? "Edit" : "Add"}</Button>
-          <Button type="reset" onClick={() => clearForm()}>
+          <Button color="primary" type="submit">{activeCategory ? "Edit" : "Add"}</Button>
+          <Button color="red" type="reset" onClick={() => clearForm()}>
             Clear
           </Button>
         </Input>

@@ -1,19 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Container, Segment, Input } from "semantic-ui-react";
+import { Container, Segment, Input, Button } from "semantic-ui-react";
 import { BusinessList } from "../components/Business";
 
 function Home({ businesses }) {
   return (
     <main>
       <Container>
-        <Segment as="section" basic vertical>
-          <Input fluid action="Search" placeholder="Search..." />
-        </Segment>
-        <Segment as="section" basic vertical>
-          <BusinessList businesses={businesses} />
-        </Segment>
+        <div style={{ margin: "0 auto", maxWidth: 600 }}>
+          <Segment as="section" basic vertical>
+            <Input fluid action="Search" placeholder="Search...">
+              <input />
+              <Button color="primary" type="submit">
+                Search
+              </Button>
+            </Input>
+          </Segment>
+          <Segment as="section" basic vertical>
+            <BusinessList businesses={businesses} />
+          </Segment>
+        </div>
       </Container>
     </main>
   );
