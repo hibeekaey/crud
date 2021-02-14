@@ -35,8 +35,8 @@ function CategoryList({ activeCategory, categories, setActiveCategory }) {
 
 CategoryList.propType = {
   categories: PropTypes.array.isRequired,
-  activeCategory: PropTypes.object.isRequired,
-  setActiveCategory: PropTypes.func.isRequired
+  activeCategory: PropTypes.object,
+  setActiveCategory: PropTypes.func
 };
 
 export default CategoryList;
