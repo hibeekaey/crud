@@ -50,17 +50,19 @@ function BusinessList({
                 </a>
               }
             />
-            <br />
             {deleteBusiness && (
-              <List.Item>
-                <Button
-                  color="red"
-                  size="small"
-                  onClick={() => deleteBusiness(business.id)}
-                >
-                  Delete
-                </Button>
-              </List.Item>
+              <>
+                <br />
+                <List.Item>
+                  <Button
+                    color="red"
+                    size="small"
+                    onClick={() => deleteBusiness(business.id)}
+                  >
+                    Delete
+                  </Button>
+                </List.Item>
+              </>
             )}
           </List>
         </Accordion.Content>

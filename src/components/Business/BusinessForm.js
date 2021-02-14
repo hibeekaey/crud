@@ -117,7 +117,7 @@ function BusinessForm({
           />
         </Form.Field>
       </Form.Group>
-      <Button color="primary" fluid type="submit">
+      <Button color="blue" fluid type="submit">
         {activeBusiness ? "Edit" : "Add"}
       </Button>
       <br />

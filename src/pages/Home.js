@@ -10,9 +10,9 @@ function Home({ businesses }) {
       <Container>
         <div style={{ margin: "0 auto", maxWidth: 600 }}>
           <Segment as="section" basic vertical>
-            <Input fluid action="Search" placeholder="Search...">
+            <Input fluid placeholder="Search...">
               <input />
-              <Button color="primary" type="submit">
+              <Button color="blue" type="submit">
                 Search
               </Button>
             </Input>

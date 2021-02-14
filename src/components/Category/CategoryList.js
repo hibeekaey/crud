@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Accordion } from "semantic-ui-react";
+import { Accordion, List, Button } from "semantic-ui-react";
 
-function CategoryList({ activeCategory, categories, setActiveCategory }) {
+function CategoryList({
+  activeCategory,
+  categories,
+  setActiveCategory,
+  deleteCategory
+}) {
   const [activeIndex, setActiveIndex] = useState(null);
 
   useEffect(() => {
@@ -28,6 +33,21 @@ function CategoryList({ activeCategory, categories, setActiveCategory }) {
         >
           {category.name}
         </Accordion.Title>
+        <Accordion.Content active={activeIndex === i}>
+          <List>
+            {deleteCategory && (
+              <List.Item>
+                <Button
+                  color="red"
+                  size="small"
+                  onClick={() => deleteCategory(category.id)}
+                >
+                  Delete
+                </Button>
+              </List.Item>
+            )}
+          </List>
+        </Accordion.Content>
       </Accordion>
     ))
   );
@@ -36,7 +56,8 @@ function CategoryList({ activeCategory, categories, setActiveCategory }) {
 CategoryList.propType = {
   categories: PropTypes.array.isRequired,
   activeCategory: PropTypes.object,
-  setActiveCategory: PropTypes.func
+  setActiveCategory: PropTypes.func,
+  deleteCategory: PropTypes.func
 };
 
 export default CategoryList;

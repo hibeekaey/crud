@@ -49,9 +49,9 @@ function Dashboard({
       menuItem: "Business",
       render: () => (
         <>
-          <Input fluid action="Search" placeholder="Search Business...">
+          <Input fluid placeholder="Search Business...">
             <input />
-            <Button color="primary" type="submit">
+            <Button color="blue" type="submit">
               Search
             </Button>
           </Input>
@@ -81,9 +81,9 @@ function Dashboard({
       menuItem: "Category",
       render: () => (
         <>
-          <Input fluid action="Search" placeholder="Search Category...">
+          <Input fluid placeholder="Search Category...">
             <input />
-            <Button color="primary" type="submit">
+            <Button color="blue" type="submit">
               Search
             </Button>
           </Input>

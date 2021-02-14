@@ -43,7 +43,7 @@ function Login({ loggedIn, login }) {
               />
             </Form.Field>
             <br />
-            <Button fluid color="primary" type="submit">
+            <Button fluid color="blue" type="submit">
               Login
             </Button>
           </Form>

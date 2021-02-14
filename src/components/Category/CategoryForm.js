@@ -46,10 +46,9 @@ function CategoryForm({
           value={category}
           onInput={(e) => setCategory(e.target.value)}
           placeholder="Add Category"
-          action
         >
           <input />
-          <Button color="primary" type="submit">
+          <Button color="blue" type="submit">
             {activeCategory ? "Edit" : "Add"}
           </Button>
           <Button color="red" type="reset" onClick={() => clearForm()}>
