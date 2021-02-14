@@ -33,8 +33,9 @@ export const updateBusiness = (business) => {
   };
 };
 
-export const deleteBusiness = () => {
+export const deleteBusiness = (id) => {
   return {
-    type: DELETE_BUSINESS
+    type: DELETE_BUSINESS,
+    payload: id
   };
 };
