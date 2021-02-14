@@ -20,6 +20,12 @@ div {
   font-family: "Montserrat", sans-serif !important;
 }
 
+body {
+  background-image: url("./assets/images/bg.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
 main {
   padding: 50px 0;
 }
